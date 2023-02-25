@@ -1,3 +1,5 @@
+# The output file. 
+
 output "bucket_name" {
   value = aws_s3_bucket.reportfiles001.id
 }
