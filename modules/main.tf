@@ -2,13 +2,13 @@ provider "aws" {
   region = "us-east-1"
 }
 
-# Create an S3 bucket for report files
+# This creates the  S3 bucket for files
 resource "aws_s3_bucket" "reportfiles001" {
   bucket = "reportfiles001"
   acl    = "private"
 }
 
-# Create an IAM role for the Lambda function
+# IAM role for the Lambda function
 resource "aws_iam_role" "lambda_execution" {
   name = "lambda_execution"
 
@@ -26,13 +26,13 @@ resource "aws_iam_role" "lambda_execution" {
   })
 }
 
-# Attach an IAM policy to the role
+# Attach the IAM policy to the role
 resource "aws_iam_role_policy_attachment" "lambda_execution_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   role       = aws_iam_role.lambda_execution.name
 }
 
-# Create a Lambda function to clean up report files
+# This is  a Lambda function to clean up report files
 resource "aws_lambda_function" "report_cleaner" {
   filename         = "report_cleaner.zip"
   function_name    = "report-cleaner"
@@ -48,26 +48,26 @@ resource "aws_lambda_function" "report_cleaner" {
   }
 }
 
-# Create a CloudWatch event rule to trigger the Lambda function
+# A CloudWatch event rule to trigger the Lambda function
 resource "aws_cloudwatch_event_rule" "schedule" {
   name                = "report_cleaner_schedule"
   description         = "Schedule for the report cleaner Lambda function"
   schedule_expression = "cron(0 0 ? * SUN *)"
 }
 
-# Create a CloudWatch event target to invoke the Lambda function
+# A  CloudWatch event target to invoke the Lambda function
 resource "aws_cloudwatch_event_target" "report_cleaner" {
   rule      = aws_cloudwatch_event_rule.schedule.name
   arn       = aws_lambda_function.report_cleaner.arn
   target_id = "report_cleaner_target"
 }
 
-# Create an SNS topic to send alerts if lingering files are found
+# An SNS topic to send alerts if lingering files are found
 resource "aws_sns_topic" "report_alerts" {
   name = "report-alerts"
 }
 
-# Create an SNS subscription to send alerts to the devops team
+# The SNS subscription to send alerts to the devops team
 resource "aws_sns_topic_subscription" "report_alerts_subscription" {
   topic_arn = aws_sns_topic.report_alerts.arn
   protocol  = "email"
