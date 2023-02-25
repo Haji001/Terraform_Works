@@ -71,5 +71,5 @@ resource "aws_sns_topic" "report_alerts" {
 resource "aws_sns_topic_subscription" "report_alerts_subscription" {
   topic_arn = aws_sns_topic.report_alerts.arn
   protocol  = "email"
-  endpoint  = "hdukereh6@gmail.com"
+  endpoint  = "devops@successacademy.com"    #Please change to it to right email before executing the job
 }
