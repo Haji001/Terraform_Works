@@ -1,0 +1,7 @@
+bucket_name = "reportfiles001"
+lambda_function_name = "report-cleaner"
+lambda_handler = "report_cleaner.lambda_handler"
+schedule_expression = "cron(30 11 * * ? *)"
+sns_topic_name = "report-alerts"
+sns_subscription_endpoint = "hdukereh6@gmail.com"
+
