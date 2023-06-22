@@ -5,11 +5,7 @@ This is a Terraform project that creates an AWS Lambda function that cleans up a
 
 It also contains a Python script that detects if there are any files left in the S3 bucket after being cleaned out and sends an alert to the DevOps team. 
 
-This is a code assessment project for Success Academy Charter Schools.
 
-## Important Note ⚠️
-
-To Success Academy Devops Team, please change the neccessary values such as the email and etc, so you can receive alerts. Also, change the cron job if you need to when testing the project at the time you want. 
 ## Documentation 📝
 
 
